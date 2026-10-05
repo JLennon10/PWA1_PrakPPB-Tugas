@@ -1,46 +1,42 @@
-# Bore & Barrel
+# Bore & Barrel — Tugas Praktikum PPB
 
-A dummy gunshop storefront built as a Progressive Web App. It runs offline
-with an app shell, a web app manifest, and a service worker, and uses React +
-Vite + Tailwind CSS.
+Katalog simulasi berbasis React + Vite dengan dukungan Progressive Web App (PWA).
+Pengembangan dari proyek awal [Redzzaja/PWA1_PrakPPB](https://github.com/Redzzaja/PWA1_PrakPPB).
 
-## Setup
+## Fitur tugas
+
+- Gambar kartu memiliki tinggi tetap dan `object-fit: contain` agar rasio gambar tidak mengubah layout.
+- Pencarian nama produk tanpa membedakan huruf besar/kecil, dikombinasikan dengan filter jenis.
+- Tombol Nama/Harga dan toggle arah A–Z/Z–A atau Termurah/Termahal.
+- Tombol tambah pada setiap kartu; badge menunjukkan jumlah seluruh unit di keranjang.
+- Kontrol kuantitas, hapus produk, subtotal per produk, dan total harga otomatis.
+- Tampilan hasil kosong, reset pencarian/filter, dan keranjang kosong.
+
+## Menjalankan di VS Code
+
+Gunakan Node.js 24 seperti lingkungan pengujian, kemudian:
 
 ```bash
-npm install
-npm run dev      # dev server with HMR
+npm ci
+npm run dev
 ```
 
-Other scripts:
+Pada terminal PowerShell yang memblokir `npm.ps1`, gunakan `npm.cmd ci` dan `npm.cmd run dev`.
+Buka URL Local yang ditampilkan Vite. Port default 5173; Vite memilih port lain jika port tersebut sudah dipakai.
+
+Task VS Code tersedia melalui **Terminal → Run Task → PWA: Run development server**.
+Build produksi dapat dijalankan dengan **Ctrl+Shift+B**.
 
 ```bash
-npm run build    # production build to dist/
-npm run preview  # serve the production build
-npm run lint     # oxlint
+npm test         # tes pencarian/filter/sort dan perhitungan keranjang
+npm run lint    # pemeriksaan oxlint
+npm run build   # build produksi + manifest dan service worker
+npm run preview # jalankan hasil build
 ```
 
-## Structure
+## Dokumentasi hasil
 
-```
-.
-├── index.html              # HTML shell
-├── vite.config.js          # Vite + vite-plugin-pwa (manifest + service worker)
-├── public/                 # static assets served at /
-│   ├── icon-192.png / icon-512.png / icon.svg
-│   └── guns/               # product images
-└── src/
-    ├── main.jsx            # entry, mounts <App/>
-    ├── App.jsx             # app shell: tab state, header/nav/content/footer
-    ├── App.css             # app shell styles
-    ├── index.css           # global styles
-    ├── components/
-    │   ├── Header.jsx      # brand + nav
-    │   ├── GunCard.jsx     # single product card
-    │   └── Footer.jsx
-    ├── data/
-    │   └── guns.js         # dummy product data
-    └── pages/
-        ├── Catalog.jsx     # product grid
-        ├── About.jsx
-        └── Contact.jsx
-```
+[Laporan langkah pengerjaan, screenshot, dan analisis singkat](docs/LAPORAN_TUGAS.md).
+
+Keranjang menyimpan data selama aplikasi terbuka dan tetap tersedia saat berpindah tab.
+Reload mengosongkan keranjang. Harga mengikuti data awal dalam USD. Aplikasi ini merupakan simulasi praktikum tanpa pembayaran.

@@ -1,21 +1,24 @@
 import { useRef } from 'react'
+import { money } from '../data/catalog.js'
 
-function GunCard({ gun }) {
+function GunCard({ gun, onAdd }) {
   const popup = useRef(null)
 
   return (
     <li className="card">
-      <button className="card-btn" onClick={() => popup.current.showModal()}>
+      <button type="button" className="card-btn" onClick={() => popup.current.showModal()} aria-label={`Detail ${gun.name}`}>
         <img className="card-img" src={gun.image} alt="" width="120" height="90" />
         <span className="name display">{gun.name}</span>
         <span className="type">
           {gun.type} · {gun.caliber}
         </span>
-        <span className="price">${gun.price.toLocaleString()}</span>
+        <span className="price">{money(gun.price)}</span>
       </button>
+      <button type="button" className="add-btn" onClick={() => onAdd(gun)} aria-label={`Tambah ${gun.name} ke keranjang`}>+ Tambah ke keranjang</button>
 
       <dialog
         className="popup"
+        aria-label={`Detail ${gun.name}`}
         ref={popup}
         onClick={(e) => e.target === popup.current && popup.current.close()}
       >
